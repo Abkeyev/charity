@@ -16,7 +16,7 @@ function App() {
         <Payment />
       ) : (
         <>
-          <Body open={open} setOpen={handleSetOpen} />
+          <Body setOpen={handleSetOpen} />
           <Share />
           <Footer />
         </>

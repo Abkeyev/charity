@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/charity/static/css/main.2bcc6727.chunk.css",
-    "main.js": "/charity/static/js/main.61230df5.chunk.js",
-    "main.js.map": "/charity/static/js/main.61230df5.chunk.js.map",
+    "main.css": "/charity/static/css/main.76f0b085.chunk.css",
+    "main.js": "/charity/static/js/main.50c5f598.chunk.js",
+    "main.js.map": "/charity/static/js/main.50c5f598.chunk.js.map",
     "runtime-main.js": "/charity/static/js/runtime-main.9790e5a3.js",
     "runtime-main.js.map": "/charity/static/js/runtime-main.9790e5a3.js.map",
     "static/js/2.2b5c1aed.chunk.js": "/charity/static/js/2.2b5c1aed.chunk.js",
     "static/js/2.2b5c1aed.chunk.js.map": "/charity/static/js/2.2b5c1aed.chunk.js.map",
     "index.html": "/charity/index.html",
-    "precache-manifest.c3827515adc36b5da6464effeed74e28.js": "/charity/precache-manifest.c3827515adc36b5da6464effeed74e28.js",
+    "precache-manifest.4f77e4ff293ae1d75825ed6702f61a6d.js": "/charity/precache-manifest.4f77e4ff293ae1d75825ed6702f61a6d.js",
     "service-worker.js": "/charity/service-worker.js",
-    "static/css/main.2bcc6727.chunk.css.map": "/charity/static/css/main.2bcc6727.chunk.css.map",
+    "static/css/main.76f0b085.chunk.css.map": "/charity/static/css/main.76f0b085.chunk.css.map",
     "static/js/2.2b5c1aed.chunk.js.LICENSE": "/charity/static/js/2.2b5c1aed.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.9790e5a3.js",
     "static/js/2.2b5c1aed.chunk.js",
-    "static/css/main.2bcc6727.chunk.css",
-    "static/js/main.61230df5.chunk.js"
+    "static/css/main.76f0b085.chunk.css",
+    "static/js/main.50c5f598.chunk.js"
   ]
 }
