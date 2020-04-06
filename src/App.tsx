@@ -13,7 +13,7 @@ function App() {
     <>
       <Header open={open} />
       {open ? (
-        <Payment />
+        <Payment setOpen={handleSetOpen} />
       ) : (
         <>
           <Body setOpen={handleSetOpen} />

@@ -8,27 +8,45 @@ const useStyles = makeStyles((theme: Theme) =>
     wrapper: {
       position: "relative",
       maxWidth: 1280,
+      padding: "0 95px 86px",
       margin: "0 auto",
+      display: "flex",
+      alignItems: "flex-end",
       boxSizing: "border-box",
+      justifyContent: "space-between",
+      "& > div": {
+        width: "50%",
+      },
       [theme.breakpoints.down("sm")]: {
-        padding: "0 24px",
+        padding: "0 48px 40px",
+        alignItems: "center",
+      },
+      [theme.breakpoints.down("xs")]: {
+        padding: "0 24px 24px",
+        alignItems: "center",
       },
     },
     title: {
-      textAlign: "center",
-      marginBottom: 24,
-    },
-    text: {
-      textAlign: "center",
       marginBottom: 32,
     },
+    text: {
+      color: "#4D565F",
+    },
+    textHead: {
+      marginBottom: 12,
+    },
     btn: {
+      marginTop: 52,
       position: "relative",
-      textAlign: "center",
+    },
+    helpBtn: {
+      minWidth: 320,
+      [theme.breakpoints.down("xs")]: {
+        width: "200%",
+        minWidth: "auto",
+      },
     },
     img: {
-      marginTop: 80,
-      marginBottom: 44,
       "& > img": {
         width: "100%",
       },
@@ -82,30 +100,32 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Body = (props: any) => {
-  const [open, setOpen] = React.useState(false);
-  const [sum, setSum] = React.useState(0);
   const classes = useStyles({});
-  const { t } = useTranslation();
 
   return (
-    <div className={classes.wrapper}>
-      <BccTypography block type="h1" className={classes.title} weight="bold">
-        #bizbirgemiz
-      </BccTypography>
-      <BccTypography block type="p2" className={classes.text}>
-        Помоги медикам в борьбе с CoVID-19
-        <br />
-        Вырученные средства пойдут на приобретение медоборудования , средств
-        защиты и лечения заболевших
-      </BccTypography>
-      <div className={classes.btn}>
-        <BccButton
-          variant="contained"
-          color="primary"
-          onClick={() => props.setOpen(!open)}
-        >
-          {open ? "Скрыть" : "Помочь медикам"}
-        </BccButton>
+    <div className={`${classes.wrapper} animated fadeIn faster`}>
+      <div>
+        <BccTypography block type="h1" className={classes.title} weight="bold">
+          #bizbirgemiz
+        </BccTypography>
+        <BccTypography block type="p2l" className={classes.textHead}>
+          Помоги медикам в борьбе с CoVID-19
+        </BccTypography>
+        <BccTypography block type="p2" className={classes.text}>
+          Вырученные средства пойдут на приобретение медоборудования,
+          <br />
+          средств защиты и лечения заболевших
+        </BccTypography>
+        <div className={classes.btn}>
+          <BccButton
+            className={classes.helpBtn}
+            variant="contained"
+            color="primary"
+            onClick={() => props.setOpen(true)}
+          >
+            Помочь медикам
+          </BccButton>
+        </div>
       </div>
       <div className={classes.img}>
         <img src={process.env.PUBLIC_URL + "/img.svg"} />

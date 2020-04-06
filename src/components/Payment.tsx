@@ -10,8 +10,8 @@ import {
 var momentTz = require("moment-timezone");
 const jsSHA = require("jssha");
 
-const Payment = () => {
-  const [sum, setSum] = React.useState(10000);
+const Payment = (props: any) => {
+  const [sum, setSum] = React.useState(1000);
   const [src, setSrc] = React.useState("");
   const { t } = useTranslation();
   function uuid() {
@@ -22,6 +22,21 @@ const Payment = () => {
     });
   }
 
+  function XOR_hex(a: string, b: string) {
+    var res = "",
+      l = Math.max(a.length, b.length);
+    for (var i = 0; i < l; i += 4)
+      res =
+        (
+          "000" +
+          (
+            parseInt(a.slice(-i - 4, -i || a.length), 16) ^
+            parseInt(b.slice(-i - 4, -i || b.length), 16)
+          ).toString(16)
+        ).slice(-4) + res;
+    return res;
+  }
+
   const generateUrl = () => {
     // const hex1 = "690B5589573ACB3608DB7395A319B175";
     // const hex2 = "02BBF98BB3411445D15498E2DC22E3E1";
@@ -29,7 +44,7 @@ const Payment = () => {
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const uid = uuid();
     let desc = encodeURIComponent(`charity`).substring(0, 80);
-    const merchant = "bcc.kz/charity";
+    const merchant = "charity";
     const terminal = "90030764";
     // const terminal = "88888881";
     const timestamp = momentTz()
@@ -46,8 +61,8 @@ const Payment = () => {
     shaObj.setHMACKey(xor, "HEX");
     shaObj.update(value);
     const pSign = shaObj.getHMAC("HEX").toUpperCase();
-    // let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=${sum}&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
-    let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=${sum}&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
+    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=${sum}&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
+    // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=${sum}&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
     // let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=30000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
     // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
     window.location.replace(url);
@@ -56,8 +71,14 @@ const Payment = () => {
 
   return (
     <div className="pWrapper">
-      <div className="paymentWrapper">
-        <div className="payment animated fadeInRight faster">
+      <div className="paymentWrapper animated fadeInUp faster">
+        <img
+          className="close"
+          onClick={() => props.setOpen(false)}
+          src={process.env.PUBLIC_URL + "/close.svg"}
+          alt="close"
+        />
+        <div className="payment">
           <BccTypography type="h6" block className="sumText">
             Сумма пожертвования
           </BccTypography>
@@ -94,9 +115,9 @@ const Payment = () => {
                   padding: 0,
                   position: "absolute",
                 }}
-                min={10000}
+                min={1000}
                 max={5000000}
-                step={10000}
+                step={5000}
                 value={sum}
                 valueLabelDisplay="off"
                 defaultValue={sum}
@@ -105,7 +126,7 @@ const Payment = () => {
                 }
               />
               <div className="sliderRange">
-                <span>10 000</span>
+                <span>1 000</span>
                 <span>5 000 000</span>
               </div>
             </div>
