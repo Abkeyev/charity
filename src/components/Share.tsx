@@ -1,5 +1,5 @@
 import React from "react";
-import BccTypography from "@bit/bcc.components.bcc-typography";
+import { BccTypography } from "./BccComponents/index";
 
 const Share = () => {
   return (

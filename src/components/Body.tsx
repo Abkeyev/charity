@@ -1,8 +1,7 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useTranslation } from "react-i18next";
-import BccTypography from "@bit/bcc.components.bcc-typography";
-import BccButton from "@bit/bcc.components.bcc-button";
+import { BccButton, BccTypography } from "./BccComponents/index";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

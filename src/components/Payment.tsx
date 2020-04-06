@@ -1,10 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import BccTypography from "@bit/bcc.components.bcc-typography";
-import BccSlider from "@bit/bcc.components.bcc-slider";
-import BccInput from "@bit/bcc.components.bcc-input";
-import BccButton from "@bit/bcc.components.bcc-button";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import {
+  BccTypography,
+  BccSlider,
+  BccButton,
+  BccInput,
+} from "./BccComponents/index";
 var momentTz = require("moment-timezone");
 const jsSHA = require("jssha");
 
