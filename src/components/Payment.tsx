@@ -5,13 +5,14 @@ import {
   BccTypography,
   BccSlider,
   BccButton,
-  BccInput,
+  BccInput
 } from "./BccComponents/index";
+import ReactGA from "react-ga";
 var momentTz = require("moment-timezone");
 const jsSHA = require("jssha");
 
 const Payment = (props: any) => {
-  const [sum, setSum] = React.useState(1000);
+  const [sum, setSum] = React.useState(0);
   const [src, setSrc] = React.useState("");
   const { t } = useTranslation();
   function uuid() {
@@ -38,15 +39,15 @@ const Payment = (props: any) => {
   }
 
   const generateUrl = () => {
-    // const hex1 = "690B5589573ACB3608DB7395A319B175";
-    // const hex2 = "02BBF98BB3411445D15498E2DC22E3E1";
-    // const xor = XOR_hex(hex1, hex2);
+    ReactGA.event({
+      category: "Further_payment_charity",
+      action: "Button_further"
+    });
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const uid = uuid();
     let desc = encodeURIComponent(`charity`).substring(0, 80);
-    const merchant = "charity";
+    const merchant = "bcc-charity";
     const terminal = "90030764";
-    // const terminal = "88888881";
     const timestamp = momentTz()
       .tz("Asia/Almaty")
       .add(-6, "hours")
@@ -62,9 +63,6 @@ const Payment = (props: any) => {
     shaObj.update(value);
     const pSign = shaObj.getHMAC("HEX").toUpperCase();
     let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=${sum}&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
-    // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=${sum}&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
-    // let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=30000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
-    // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
     window.location.replace(url);
     setSrc(url);
   };
@@ -90,17 +88,15 @@ const Payment = (props: any) => {
                 value={sum}
                 variant="filled"
                 InputLabelProps={{
-                  shrink: true,
+                  shrink: true
                 }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">₸</InputAdornment>
-                  ),
+                  )
                 }}
                 onChange={(e: any) =>
-                  e.target.value < 1
-                    ? setSum(1)
-                    : e.target.value > 5000000
+                  e.target.value > 5000000
                     ? setSum(5000000)
                     : setSum(e.target.value)
                 }
@@ -113,9 +109,9 @@ const Payment = (props: any) => {
                   width: "calc(100% - 12px)",
                   bottom: -1,
                   padding: 0,
-                  position: "absolute",
+                  position: "absolute"
                 }}
-                min={1000}
+                min={0}
                 max={5000000}
                 step={5000}
                 value={sum}
@@ -126,7 +122,7 @@ const Payment = (props: any) => {
                 }
               />
               <div className="sliderRange">
-                <span>1 000</span>
+                <span>0</span>
                 <span>5 000 000</span>
               </div>
             </div>
