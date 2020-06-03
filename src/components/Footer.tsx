@@ -1,197 +1,405 @@
 import React from "react";
+import { Grid } from "@material-ui/core";
+import { BccTypography, BccLink, BccButton } from "./BccComponents";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { useTranslation } from "react-i18next";
-import { BccTypography } from "./BccComponents/index";
+import ReactGA from "react-ga";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    footerWrap: {
-      backgroundColor: "#000D1A",
-    },
-    footer: {
-      padding: "46px 95px 64px",
-      display: "flex",
-      maxWidth: 1280,
-      margin: "0 auto",
-      flexWrap: "wrap",
-      boxSizing: "border-box",
-      justifyContent: "space-between",
-      color: "white",
-      [theme.breakpoints.down("sm")]: {
-        padding: "24px 48px 32px",
+    [theme.breakpoints.down("sm")]: {
+      container: {
+        backgroundColor: "#1F7042",
       },
-      [theme.breakpoints.down("xs")]: {
-        padding: "12px 24px 16px",
-      },
-    },
-    title: {
-      marginBottom: 24,
-      color: "white",
-    },
-    contacts: {
-      width: "30%",
-      [theme.breakpoints.down("sm")]: {
-        width: "55%",
-      },
-      [theme.breakpoints.down("xs")]: {
-        width: "60%",
-      },
-    },
-    social: {
-      width: "20%",
-      [theme.breakpoints.down("sm")]: {
-        width: "40%",
-      },
-      [theme.breakpoints.down("xs")]: {
-        width: "40%",
-      },
-    },
-    socialLink: {
-      display: "flex",
-      justifyContent: "space-between",
-      maxWidth: 128,
-    },
-    copyright: {
-      width: "40%",
-      opacity: 0.5,
-      [theme.breakpoints.down("sm")]: {
+      innerContainer: {
+        maxWidth: "100%",
+        margin: "0 auto",
         width: "100%",
-        marginTop: 24,
+        padding: "40px 20px",
+        boxSizing: "border-box",
       },
-    },
-    img: {
-      display: "inline-block",
-      width: 32,
-      height: 32,
-      marginRight: 8,
-      verticalAlign: "top",
-    },
-    phone: {
-      marginBottom: 16,
-      opacity: 0.5,
-      "& > a": {
-        color: "inherit",
+      title: {
+        marginBottom: 50,
       },
-    },
-    call1: {
-      "& > a": {
-        color: "inherit",
+      footerOne: { width: "calc(50% - 20px)" },
+      footerTwo: { width: "calc(50% - 20px)" },
+      footIcon: {
+        display: "block",
+        height: 20,
+        width: 20,
+      },
+      footIconSocial: {
+        display: "block",
+        height: 20,
+        width: 20,
+        marginRight: 15,
+      },
+      footLink: {
+        marginLeft: 10,
         textDecoration: "none",
+        color: "white",
+        flexDirecton: "row",
+        "&:hover": {
+          textDecoration: "underline",
+        },
+        "& > span": {
+          fontWeight: "bold",
+        },
+      },
+      footItem: {
+        marginBottom: 20,
+      },
+      footItemSocial: {
+        marginTop: 30,
+      },
+      footBtn: {
+        width: "100%",
+        maxWidth: 250,
+        color: "#1F7042",
+        lineHeight: "auto",
+        margin: "30px 0 20px",
+      },
+      mobileTitle: {
+        color: "#CCCFD1",
+        fontSize: 16,
+        fontWeight: "bold",
+        marginBottom: 10,
+      },
+      appLinks: {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        justifyContent: "space-between",
+        width: "100%",
+        "& > a": {
+          disaply: "block",
+          width: "calc(50% - 5px)",
+          "& > img": { width: "100%", maxWidth: 150 },
+        },
+      },
+      footLinks: {
+        marginBottom: 20,
+        "& > div": {
+          display: "flex",
+          flexDirection: "column",
+          width: "calc(50% - 15px)",
+          "& > a": {
+            display: "inline-block",
+            color: "white",
+            textDecoration: "none",
+            fontSize: 16,
+            marginBottom: 24,
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          },
+          "& > a:last-child": { marginBottom: 0 },
+        },
+      },
+      footLicen: {
+        color: "#CCCFD1",
+        lineHeight: "19px",
+        fontSize: 16,
       },
     },
-    call: {
-      marginTop: 4,
-      opacity: 0.5,
-      "& > a": {
-        color: "inherit",
+    [theme.breakpoints.between("md", "xl")]: {
+      container: {
+        backgroundColor: "#1F7042",
+      },
+      innerContainer: {
+        maxWidth: 1280,
+        margin: "0 auto",
+        width: "100%",
+        padding: "40px 100px 80px",
+        boxSizing: "border-box",
+      },
+      title: {
+        marginBottom: 50,
+      },
+      footerOne: { width: "35%" },
+      footerTwo: { width: "calc(65% - 50px)" },
+      footIcon: {
+        display: "block",
+        height: 20,
+        width: 20,
+      },
+      footIconSocial: {
+        display: "block",
+        height: 20,
+        width: 20,
+        marginRight: 15,
+      },
+      footLink: {
+        marginLeft: 10,
         textDecoration: "none",
+        color: "white",
+        "&:hover": {
+          textDecoration: "underline",
+        },
+        "& > span": {
+          fontWeight: "bold",
+        },
+      },
+      footItem: {
+        marginBottom: 20,
+      },
+      footItemSocial: {
+        marginTop: 30,
+      },
+      footBtn: {
+        width: "100%",
+        color: "#1F7042",
+        maxWidth: 250,
+        lineHeight: "20px",
+        margin: "30px 0 20px",
+      },
+      mobileTitle: {
+        color: "#CCCFD1",
+        fontSize: 16,
+        fontWeight: "bold",
+        marginBottom: 10,
+      },
+      appLinks: {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        justifyContent: "space-between",
+        width: "100%",
+        "& > a": {
+          disaply: "block",
+          width: "calc(50% - 15px)",
+          "& > img": { width: "100%" },
+        },
+      },
+      footLinks: {
+        marginBottom: 20,
+        "& > div": {
+          display: "flex",
+          flexDirection: "column",
+          width: "calc(50% - 15px)",
+          "& > a": {
+            display: "inline-block",
+            color: "white",
+            textDecoration: "none",
+            fontSize: 16,
+            marginBottom: 24,
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          },
+          "& > a:last-child": { marginBottom: 0 },
+        },
+      },
+      footLicen: {
+        color: "#CCCFD1",
+        lineHeight: "19px",
+        fontSize: 16,
       },
     },
-    copy: {
-      marginBottom: 40,
+    [theme.breakpoints.down("xs")]: {
+      foot: {
+        flexDirection: "column",
+      },
+      foot2: {
+        flexDirection: "column",
+      },
+      footerOne: { width: "100%" },
+      footerTwo: { width: "100%" },
     },
   })
 );
 
-const Footer = () => {
+const Footer = (props: any) => {
   const classes = useStyles({});
-  const { t } = useTranslation();
+
+  const openBtn = () => {};
 
   return (
-    <div className={classes.footerWrap}>
-      <div className={`${classes.footer}  animated fadeIn faster`}>
-        <div className={classes.contacts}>
-          <BccTypography
-            className={classes.title}
-            block
-            type="p2"
-            weight="medium"
-          >
-            Контакты
-          </BccTypography>
-          <div>
-            <img
-              className={classes.img}
-              src={process.env.PUBLIC_URL + "/phone.svg"}
-            />
-            <BccTypography type="h1" weight="medium">
-              <BccTypography
-                block
-                type="p1"
-                weight="medium"
-                className={classes.call1}
-              >
-                <a href="tel:505">505</a>
-              </BccTypography>
-              <BccTypography
-                block
-                type="p3"
-                className={classes.phone}
-                weight="medium"
-              >
-                Бесплатно с мобильного
-              </BccTypography>
-            </BccTypography>
-          </div>
-          <div>
-            <img
-              className={classes.img}
-              src={process.env.PUBLIC_URL + "/call.svg"}
-            />
-            <BccTypography type="h1" weight="medium">
-              <BccTypography
-                block
-                type="p1"
-                className={classes.call}
-                weight="medium"
-              >
-                <a href="tel:87272443030">8 (727) 244 30 30</a>
-              </BccTypography>
-            </BccTypography>
-          </div>
-        </div>
-        <div className={classes.social}>
-          <BccTypography
-            className={classes.title}
-            block
-            type="p2"
-            weight="medium"
-          >
-            В соц. сетях
-          </BccTypography>
-
-          <div className={classes.socialLink}>
-            <div>
-              <a href="https://www.facebook.com/bcc.kz/" target="_blank">
-                <img src={process.env.PUBLIC_URL + "/fb.svg"} />
-              </a>
+    <div className={classes.container}>
+      <div className={classes.innerContainer}>
+        <Grid
+          container
+          justify="space-between"
+          direction="row"
+          wrap="nowrap"
+          className={classes.foot}
+        >
+          <Grid item className={classes.footerOne}>
+            <Grid container direction="column">
+              <Grid item className={classes.footItem}>
+                <Grid container>
+                  <Grid item>
+                    <img
+                      className={classes.footIcon}
+                      src={process.env.PUBLIC_URL + "/f_phone.svg"}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <a href="#" target="_blank" className={classes.footLink}>
+                      <span>505</span> Бесплатно с мобильного
+                    </a>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item className={classes.footItem}>
+                <Grid container>
+                  <Grid item>
+                    <img
+                      className={classes.footIcon}
+                      src={process.env.PUBLIC_URL + "/f_call.svg"}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <a href="#" target="_blank" className={classes.footLink}>
+                      <span>+7 727 244-30-30</span>
+                    </a>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Grid container>
+                  <Grid item>
+                    <img
+                      className={classes.footIcon}
+                      src={process.env.PUBLIC_URL + "/f_mail.svg"}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <a href="#" target="_blank" className={classes.footLink}>
+                      <span>info@bcc.kz</span>
+                    </a>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item className={classes.footItemSocial}>
+                <Grid container>
+                  <Grid item>
+                    <a href="#" target="_blank">
+                      <img
+                        className={classes.footIconSocial}
+                        src={process.env.PUBLIC_URL + "/ig.svg"}
+                      />
+                    </a>
+                  </Grid>
+                  <Grid item>
+                    <a href="#" target="_blank">
+                      <img
+                        className={classes.footIconSocial}
+                        src={process.env.PUBLIC_URL + "/fb.svg"}
+                      />
+                    </a>
+                  </Grid>
+                  <Grid item>
+                    <a href="#" target="_blank">
+                      <img
+                        className={classes.footIconSocial}
+                        src={process.env.PUBLIC_URL + "/vk.svg"}
+                      />
+                    </a>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <BccButton
+                  className={classes.footBtn}
+                  variant="outlined"
+                  color="primary"
+                >
+                  Отправить сообщение
+                </BccButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item className={classes.footerTwo}>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              className={classes.footLinks}
+            >
+              <Grid item>
+                <a href="#" target="_blank">
+                  О банке
+                </a>
+                <a href="#" target="_blank">
+                  Акции
+                </a>
+                <a href="#" target="_blank">
+                  Тарифы
+                </a>
+                <a href="#" target="_blank">
+                  Вакансии
+                </a>
+                <a href="#" target="_blank">
+                  Реквизиты
+                </a>
+                <a href="#" target="_blank">
+                  Залоговая база
+                </a>
+                <a href="#" target="_blank">
+                  Сборник форм договоров
+                </a>
+              </Grid>
+              <Grid item>
+                <a href="#" target="_blank">
+                  Пресс-служба
+                </a>
+                <a href="#" target="_blank">
+                  Вопросы-ответы
+                </a>
+                <a href="#" target="_blank">
+                  Центр обслуживания вызовов
+                </a>
+                <a href="#" target="_blank">
+                  Косплаенс–контроль
+                </a>
+                <a href="#" target="_blank">
+                  Информация для инвесторов
+                </a>
+                <a href="#" target="_blank">
+                  Информация акционерам
+                </a>
+                <a href="#" target="_blank">
+                  Правила об общих условиях проведения операций
+                </a>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          justify="space-between"
+          direction="row"
+          wrap="nowrap"
+          className={classes.foot2}
+        >
+          <Grid item className={classes.footerOne}>
+            <Grid container>
+              <Grid item className={classes.mobileTitle}>
+                Мобильное приложение
+              </Grid>
+              <Grid item className={classes.appLinks}>
+                <a
+                  href="https://apps.apple.com/kz/app/starbusiness/id1452748006"
+                  target="_blank"
+                >
+                  <img src={process.env.PUBLIC_URL + "/as.svg"} />
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=bcc.sapphire&hl=ru"
+                  target="_blank"
+                >
+                  <img src={process.env.PUBLIC_URL + "/gp.svg"} />
+                </a>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item className={classes.footerTwo}>
+            <div className={classes.footLicen}>
+              Лицензия на проведение банковских и иных операций и деятельности
+              на рынке ценных бумаг №1.2.25/195/34 от 28.01.2015 выданная НБ РК.
             </div>
-            <div>
-              <a
-                href="https://www.instagram.com/centercreditkz/?hl=ru"
-                target="_blank"
-              >
-                <img src={process.env.PUBLIC_URL + "/in.svg"} />
-              </a>
-            </div>
-            <div>
-              <a href="https://vk.com/centercredit" target="_blank">
-                <img src={process.env.PUBLIC_URL + "/vk.svg"} />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className={classes.copyright}>
-          <BccTypography block type="p2" className={classes.copy}>
-            © 2000 - 2019 АО "Банк ЦентрКредит"
-            <br />
-            Все права защищены.
-          </BccTypography>
-          <BccTypography block type="p2">
-            Лицензия на проведение банковских и иных операций и деятельности на
-            рынке ценных бумаг №1.2.25/195/34 от 28.01.2015 выданная НБ РК.
-          </BccTypography>
-        </div>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
