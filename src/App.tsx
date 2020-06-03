@@ -1,25 +1,27 @@
 import React from "react";
-import {
-  Banner,
-  Online,
-  Benefits,
-  Order,
-  Additional,
-  Useful,
-  Footer,
-} from "./components";
+import { Header, Body, Payment, Share, Footer } from "./components";
 import "./App.css";
 
 function App() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleSetOpen = (open: boolean) => {
+    setOpen(open);
+  };
+
   return (
-    <div>
-      <Banner />
-      <Online />
-      <Benefits />
-      <Order />
-      <Useful />
-      <Footer />
-    </div>
+    <>
+      <Header open={open} />
+      {open ? (
+        <Payment setOpen={handleSetOpen} />
+      ) : (
+        <>
+          <Body setOpen={handleSetOpen} />
+          <Share />
+          <Footer />
+        </>
+      )}
+    </>
   );
 }
 
